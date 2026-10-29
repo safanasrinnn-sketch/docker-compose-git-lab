@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docker Compose Lab</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 750px;
+      margin: 60px auto;
+      padding: 20px;
+      background: #f3f6fb;
+      color: #202938;
+    }
+    main {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+    }
+    button {
+      padding: 10px 16px;
+      cursor: pointer;
+    }
+    pre {
+      padding: 15px;
+      background: #eef2f7;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Docker Compose Multi-Container Application</h1>
+    <p>The Nginx web service is running successfully.</p>
+    <p>Use the button to test communication with the Node.js API.</p>
+    <button onclick="testApi()">Test API Connection</button>
+    <pre id="result">Click the button to test the API.</pre>
+  </main>
+
+  <script>
+    async function testApi() {
+      const result = document.getElementById("result");
+      result.textContent = "Connecting to API...";
+
+      try {
+        const response = await fetch("/api");
+        const data = await response.json();
+        result.textContent = JSON.stringify(data, null, 2);
+      } catch (error) {
+        result.textContent = "API request failed: " + error.message;
+      }
+    }
+  </script>
+</body>
+</html>
